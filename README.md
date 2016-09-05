@@ -1,15 +1,14 @@
-# aes_rsa
-> 公司需求要求进行数据加密(Android)。
-> 加密方式：AES和RSA结合
-*一、AES加密
-*1、先把参数拼接成json字符串，如：{"username":"15000000000","password":"123456"}
-*   2、生成一个16为的随机数，作为key
-*   3、用这个key加密json字符串
-*二、RSA加密
-*   1、用RSA算法加密AES加密key，密钥为分发的公钥
-   2、将加密的key及加密的业务数据拼接为json字符串，如下：
+公司需求要求进行数据加密(Android)。
+加密方式：AES和RSA结合
+#### 一、AES加密
+-   1、先把参数拼接成json字符串，如：{"username":"15000000000","password":"123456"}
+-  2、生成一个16为的随机数，作为key
+-  3、用这个key加密json字符串
+#### 二、RSA加密
+-  1、用RSA算法加密AES加密key，密钥为分发的公钥
+-  2、将加密的key及加密的业务数据拼接为json字符串，如下：
    {"encryptkey":"Ra1Aw0IhTh/dj6LfS+fga3qPXs3PgXcxDQSLwdBOKXO9satr2L/GhwqxBfnfPNULzbJn6fvZw7x2ykS//0lGRUe4D1YUpwe7n0GocHrh17nJEpPjecZpXMWCk0N5sVtYPrbfGMfKKS5Z3WPK2fiGA77ZVwt1coCteCQiaNNACTQ=","data":"wwyrOIHoLUwOyMp6UQyzO484gcqapF2ikSGgccHnYj2EIisHllSnu5RGY0g+fK2G"}
-   3、将上一步生成的json串拼接到jsonstr=的后面上送服务器，也就是说，接口只需要一个参数：jsonstr
+- 3、将上一步生成的json串拼接到jsonstr=的后面上送服务器，也就是说，接口只需要一个参数：jsonstr
    加密方法（在Decipher类里面）：
        public Map<String, String> encryptData(Map<String, String> param) throws Exception {
 
