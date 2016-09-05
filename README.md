@@ -1,8 +1,8 @@
 # aes_rsa
-#公司需求要求进行数据加密(Android)。
-#加密方式：AES和RSA结合
-一、AES加密
-   1、先把参数拼接成json字符串，如：{"username":"15000000000","password":"123456"}
+> 公司需求要求进行数据加密(Android)。
+> 加密方式：AES和RSA结合
+> 一、AES加密
+1、先把参数拼接成json字符串，如：{"username":"15000000000","password":"123456"}
    2、生成一个16为的随机数，作为key
    3、用这个key加密json字符串
 二、RSA加密
