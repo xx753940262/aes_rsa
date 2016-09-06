@@ -3,7 +3,10 @@
 
 ------
 #### 一、AES加密
--   1、先把参数拼接成json字符串，如：{"username":"15000000000","password":"123456"}
+-   1、先把参数拼接成json字符串，如：
+```python
+{"username":"15000000000","password":"123456"}
+```
 -   2、生成一个16为的随机数，作为key
 -   3、用这个key加密json字符串
   
@@ -11,11 +14,13 @@
 ####二、RSA加密
 -  1、用RSA算法加密AES加密key，密钥为分发的公钥
 -  2、将加密的key及加密的业务数据拼接为json字符串，如下：
+```python
  {"encryptkey":"Ra1Aw0IhTh/dj6LfS+fga3qPXs3PgXcxDQSLwdBOKXO9satr2L/GhwqxBfnfPNULzbJn6fvZw7x2ykS//0lGRUe4D1YUpwe7n0GocHrh17nJEpPjecZpXMWCk0N5sVtYPrbfGMfKKS5Z3WPK2fiGA77ZVwt1coCteCQiaNNACTQ=","data":"wwyrOIHoLUwOyMp6UQyzO484gcqapF2ikSGgccHnYj2EIisHllSnu5RGY0g+fK2G"}
+```
 - 3、将上一步生成的json串拼接到jsonstr=的后面上送服务器，也就是说，接口只需要一个参数：jsonstr
 
    加密方法（在Decipher类里面）：
-
+```python
     public Map<String, String> encryptData(Map<String, String> param) throws Exception {
 
         String json = map2json(param);
@@ -44,16 +49,17 @@
         Log.e("jsonstr=", map2json(result));
         return result;
     }
-        
--------------
+```
 ####三、解密
 - 1、返回的数据，如下：
+```python
 {"data":"HbSms2HUmYurJLvi4cc17WeLpMpKRQigmwXq4FbImaKkhw7JN1jIbdsNTuCdQuI7alRKoOiXMlG9oOaRkmweLflxmi2/f5NXhcPo78ooAFjvtYkaE7uPh5UIv7s6Spdj","encryptkey":"C/hMayfxrczzsxoU8gLcL39V4YsEdQGeNCwhkgAwCYNyYjpJeL0cYHeluoC/NuY4qpjOXH65HdUahtevo78jeqTsrGRyXFWSlS2PtcNX3u782cIISLtS9tKRyr9XWtW3MnMOyNRiQQhBbSUiXYFxrIP6vdTnZc7X0JLfcuru8Zw="}
+```
 - 2、提取encryptkey并用私钥解密，解密算法为RSA，得到的明文就是AES解密key
 - 3、用AES解密key解密data字段，得到的明文即为业务数据
 
 解密方法（在Decipher类里面）:
-
+```python
     public static String decryptResult(Context context, String result) {
         try {
             result = new Decipher().decryptData(context, result);
@@ -63,7 +69,8 @@
         }
         return result;
     }
-    
+```
+```python
     public String decryptData(Context context, String post) throws Exception {
   
         // 将返回的json串转换为map
@@ -91,47 +98,37 @@
 
         return post;
     }
-    
--------------
+```
 ####四、如何使用：
--------------
 - 1、Add it in your root build.gradle at the end of repositories:
-
--------------
-    allprojects {
+```python
+ allprojects {
         repositories {
             ...
             maven { url "https://jitpack.io" }
         }
     }
-    
--------------    
+```    
 - 2、Add the dependency
-
--------------
+```python
         dependencies {
            compile 'com.github.xx753940262:aes_rsa:1.0.1'
         }
-
--------------
+```
 - 3、加密：
-
--------------
+```python
 Map<String, String> params；
 Decipher decipher = new Decipher();
 decipher.encryptData(params);
 加密完的数据是map类型，提交http数据即可。
-
--------------
+```
 - 4、解密：
-
--------------
+```python
 String result = Decipher.decryptResult(context, responseStr);
 context为上下文，responseStr为返回的加密数据，result为解密后的数据。
 公司需求要求进行数据加密(Android)。
 加密方式：AES和RSA结合
-
--------------
+```
 ####五、说明
 在读取私钥时，用到FileInputStream读取文件(坑：用InputStream读取文件，获取不到私钥)
 Android中存放文件，assets和raw中，都测试过用，都打不开私钥。
@@ -141,5 +138,6 @@ raw读取文件，InputStream is = getResources().openRawResource(R.id.filename)
 所以呢，换了一种实现方式，可能很笨。
 把assets文件拷贝到sd卡中，然后用FileInputStream读取文件获取私钥。
 哎。。。，坑了好几天，终于解决了。
+
 
 
