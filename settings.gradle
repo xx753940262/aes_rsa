@@ -1,1 +1,1 @@
-include ':app'
+include ':app', ':aes_rsa_library'

@@ -1,4 +1,4 @@
-package com.zmr.aes_rsa;
+package com.zmr.aes_rsa_library;
 
 import java.io.UnsupportedEncodingException;
 

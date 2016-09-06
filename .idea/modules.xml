@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/aes_rsa.iml" filepath="$PROJECT_DIR$/aes_rsa.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aes_rsa_library/aes_rsa_library.iml" filepath="$PROJECT_DIR$/aes_rsa_library/aes_rsa_library.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
