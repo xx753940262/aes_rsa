@@ -94,12 +94,38 @@
     
 -------------
 ####四、如何使用：
-- 1、加密：
+-------------
+- 1、Add it in your root build.gradle at the end of repositories:
+
+-------------
+    allprojects {
+        repositories {
+            ...
+            maven { url "https://jitpack.io" }
+        }
+    }
+    
+-------------    
+- 2、Add the dependency
+
+-------------
+        dependencies {
+           compile 'com.github.xx753940262:aes_rsa:1.0.1'
+        }
+
+-------------
+- 3、加密：
+
+-------------
 Map<String, String> params；
 Decipher decipher = new Decipher();
 decipher.encryptData(params);
 加密完的数据是map类型，提交http数据即可。
-- 2、解密：
+
+-------------
+- 4、解密：
+
+-------------
 String result = Decipher.decryptResult(context, responseStr);
 context为上下文，responseStr为返回的加密数据，result为解密后的数据。
 公司需求要求进行数据加密(Android)。
